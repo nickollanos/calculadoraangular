@@ -1,1 +1,58 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'digital-7.ttf';
+  src: url('assets/fonts/digital-7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'digital-7.ttf';
+  src: url('assets/fonts/digital-7\ \(mono\).ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-variant: monospace;
+}
+
+@font-face {
+  font-family: 'digital-7.ttf';
+  src: url('assets/fonts/digital-7\ \(italic\).ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+
+/****movile***/
+@media (min-width: 480px) and (max-width: 640px) {
+
+  app-root{
+
+    app-pantalla{
+      width: 80%;
+      height: 10vh;
+      font-size: 1.5rem;
+
+    }
+
+    app-teclado{
+      width: 80%;
+      height: 50vh;
+      font-size: 1.2rem;
+
+    }
+  }
+}
+
+/****tablet***/
+@media (min-width: 768px) and (max-width: 992px) {
+
+  app-root{
+
+    app-pantalla{
+
+    }
+
+    app-teclado{
+
+    }
+  }
+}

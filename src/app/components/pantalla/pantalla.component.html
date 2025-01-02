@@ -1,0 +1,27 @@
+<div class="error"
+*ngIf="error"
+>
+<h1>{{ error }}</h1>
+</div>
+
+<div class="hist"
+*ngIf="!error && vHistory"
+>
+  <h1>{{ history }}</h1>
+</div>
+
+<div class="conver"
+*ngIf="!error"
+>
+  <div class="oper"
+  *ngIf="!error && vOper"
+  >
+    <h1>{{ operando }}</h1>
+  </div>
+
+  <div class="equal"
+  *ngIf="!error"
+  >
+    <span>= {{ resultado || '0' | scientific:4 }}</span>
+  </div>
+</div>

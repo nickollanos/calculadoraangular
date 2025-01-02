@@ -1,0 +1,49 @@
+div.ppal{
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  height: 80%;
+  margin: auto;
+  padding-bottom: 2rem;
+
+  div.calc{
+    border: solid 5px black;
+    background-color: rgb(85, 77, 77);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    align-items: center;
+    gap: 1rem;
+
+    h1{
+      height: 5px;
+      font-size: 1rem;
+    }
+
+    div.pant{
+      border: solid 5px black;
+      width: 80%;
+      height: 10rem;
+      border-radius: 1rem;
+      background-color: rgb(238, 227, 227);
+      align-items: center;
+    }
+
+    div.key{
+      border: solid 5px black;
+      background-color: rgb(126, 123, 123);
+      width: 80%;
+      height: 22rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+    }
+  }
+}
