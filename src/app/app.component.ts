@@ -24,9 +24,6 @@ export class AppComponent {
   public vOper: boolean = false;
   public error: string = '';
   public operando: string = '';
-  public operador: string = '';
-  public num1: string = '';
-  public num2: string = '';
 
   constructor(
     private calculosService: CalculosService
@@ -35,7 +32,6 @@ export class AppComponent {
   public operadores ( num : string ) {
 
     if ( this.operando === '' && num === '.' && num.length === 1 ) return;
-
 
     if ( num === 'delete' || num === 'c'|| num === 'history' || num === '=' ){
 
@@ -48,6 +44,10 @@ export class AppComponent {
     } else {
 
       this.operando += num;
+      if (/^[+\-*/]/.test(this.operando[0]) ){
+        this.operando = '';
+        return;
+      }
       this.vOper = true;
       console.log(this.operando);
 
