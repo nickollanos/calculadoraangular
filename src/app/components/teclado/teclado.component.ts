@@ -12,7 +12,7 @@ import { Datos } from '../../app.types';
 export class TecladoComponent {
 
   @Output()
-  public numeros = new EventEmitter<string>();
+  public teclas = new EventEmitter<string>();
   @Output()
   public operador = new EventEmitter<string>();
 
@@ -20,9 +20,26 @@ export class TecladoComponent {
 
   }
 
-  numero( num : string ) {
-    this.numeros.emit( num );
-    // console.log( dato );
+  teclado( event : KeyboardEvent ): void {
+    const key = event.key;
+    console.log(key);
+
+    if ('0123456789'.includes(key)) {
+      this.operador.emit(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+      this.operador.emit(key);
+    } else if (key === 'Enter' || key === '=') {
+      this.operador.emit('=');
+    } else if (key === 'Backspace' || key === 'Delete') {
+      this.operador.emit('delete');
+    } else if (key === '.') {
+      this.operador.emit('.');
+    } else if (key === 'c') {
+      this.operador.emit('c');
+    } else if (key === '(' || key === ')') {
+      this.operador.emit('par');
+    }
+
 
   }
 

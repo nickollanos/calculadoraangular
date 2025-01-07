@@ -311,7 +311,7 @@ div.grande{
   div.fila5{
     display: flex;
     height: 11vh;
-    gap: 3rem;
+    gap: 1rem;
 
     div.cero{
       display: flex;
@@ -328,6 +328,25 @@ div.grande{
         font-size: 2rem;
         font-weight: 900;
       }
+    }
+
+    div.par{
+      display: flex;
+      border: solid 3px black;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+      width: 20%;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      background-color: rgba(255, 255, 255, 0.5);
+      color: black;
+
+      img{
+        height: 2rem;
+        right: 2rem;
+        margin-left: 2px;
+      }
+
     }
 
     div.point{
@@ -365,4 +384,9 @@ div.grande{
     }
 
   }
+}
+
+div.grande:focus {
+  outline: none;
+  box-shadow: none;
 }

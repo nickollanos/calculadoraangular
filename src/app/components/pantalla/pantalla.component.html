@@ -16,12 +16,17 @@
   <div class="oper"
   *ngIf="!error && vOper"
   >
-    <h1>{{ operando }}</h1>
+    <h1
+    [style.font-size]="hLetra +'rem'"
+    >{{ operando }}
+  </h1>
   </div>
 
   <div class="equal"
   *ngIf="!error"
   >
-    <span>= {{ resultado || '0' | scientific:4 }}</span>
+    <span
+    [style.font-size]="sLetra +'rem'"
+    >= {{ resultado || '0' | scientific:4 }}</span>
   </div>
 </div>

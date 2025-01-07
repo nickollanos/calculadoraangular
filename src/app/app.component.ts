@@ -24,27 +24,86 @@ export class AppComponent {
   public vOper: boolean = false;
   public error: string = '';
   public operando: string = '';
+  public hLetra: number = 2.8;
+  public sLetra: number = 2;
 
   constructor(
     private calculosService: CalculosService
   ) { }
 
   public operadores ( num : string ) {
+    console.log(num);
+
+    if (this.operando === '' && num === '-' ){
+      this.operando += '-';
+      this.resultado += '0';
+      console.log(this.operando);
+      return;
+    }
+
+    if (num === '=' && this.operando === '' ){
+      this.operando = '';
+      this.resultado = '';
+      this.hLetra = 2.8;
+      this.sLetra = 2;
+      return;
+    }
+
+    console.log(num);
+    if ( num === 'par' ){
+      let apertura = (this.operando.match(/\(/g) || []).length;
+      console.log(apertura);
+
+      let cierre = (this.operando.match(/\)/g) || []).length;
+      console.log(cierre);
+
+      if ( apertura > cierre ){
+        this.operando += ')';
+        num = '';
+        return;
+      } else if ( cierre > apertura ) {
+        this.operando += '(';
+        num = '';
+      } else if ( cierre === apertura ){
+        this.operando += '(';
+        num = '';
+        return;
+      }
+    }
 
     if ( this.operando === '' && num === '.' && num.length === 1 ) return;
+    console.log(this.operando);
 
-    if ( num === 'delete' || num === 'c'|| num === 'history' || num === '=' ){
+    if ( this.operando === '' ) {
+      this.hLetra = 2.8;
+      this.sLetra = 2;
+    }
+
+    if ( num === 'delete' || num === 'c'|| num === 'history' || num === '='){
 
       if ( num === 'delete' ){
         this.delete(this.operando);
       } else if ( num === 'c' ) {
         this.limpiar();
+      } else if ( num === '=' ){
+        this.hLetra = 1.5;
+        this.sLetra = 2.6;
+        this.operando = '';
       }
 
     } else {
 
       this.operando += num;
-      if (/^[+\-*/]/.test(this.operando[0]) ){
+
+      console.log(this.operando);
+
+      console.log(/^[+\/*]/.test( this.operando[this.operando.length-1] ));
+      console.log(this.operando[this.operando.length-2] === ')');
+
+
+      if ( /^[+\-/*]/.test( this.operando[this.operando.length-1] ) &&  this.operando[this.operando.length-2] === ')') return;
+
+      if (/^[+\/*]/.test(this.operando[0]) ){
         this.operando = '';
         return;
       }
@@ -247,6 +306,10 @@ export class AppComponent {
         this.error = err;
       }
     });
+
+    if ( this.operando[this.operando.length-1] === '(' ) {
+      return;
+    }
     this.operacion( this.operando );
   }
 
@@ -272,7 +335,7 @@ export class AppComponent {
         this.operando = result.operador;
         this.resultado = result.resul;
         this.error = result.resul;
-        console.log('Datos limpiados: ', this.num1, this.num2, this.operador, this.resultado);
+        console.log('Datos limpiados');
       },
       error: (err) => {
         this.error = err;

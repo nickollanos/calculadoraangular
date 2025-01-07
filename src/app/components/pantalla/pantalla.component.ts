@@ -7,13 +7,12 @@ import { ScientificPipe } from '../../pipes/scientific.pipe';
   standalone: true,
   imports: [
     CommonModule,
-    ScientificPipe
-  ],
+    ScientificPipe,
+],
   templateUrl: './pantalla.component.html',
   styleUrl: './pantalla.component.css'
 })
 export class PantallaComponent {
-
 
 @Input()
 public resultado: string = '';
@@ -27,6 +26,10 @@ public history: string = '';
 public vHistory: boolean = false;
 @Input()
 public vOper: boolean = false;
+@Input()
+public hLetra: number = 0;
+@Input()
+public sLetra: number = 0;
 
  constructor() {
 

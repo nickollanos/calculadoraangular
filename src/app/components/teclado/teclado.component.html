@@ -1,4 +1,4 @@
-<div class="grande">
+<div class="grande" tabindex="0" autofocus (keydown)="teclado($event)">
 
   <div class="fila1">
 
@@ -123,6 +123,12 @@
     (click)="opera('0')"
     >
       <span>0</span>
+    </div>
+
+    <div class="par"
+    (click)="opera('par')"
+    >
+      <img src="images/par.svg" alt="point">
     </div>
 
     <div class="point"

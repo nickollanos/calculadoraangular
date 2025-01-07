@@ -60,6 +60,8 @@ export class CalculosService {
     operando = operando.trim();
 
     let formato = /^[0-9+\-*/().\s]*$/;
+    let apertura = (operando.match(/\(/g) || []).length;
+    let cierre = (operando.match(/\)/g) || []).length;
 
     if ( !formato.test(operando) ){
       return throwError(() => new Error('Expresion matematica invalida'));
@@ -71,6 +73,13 @@ export class CalculosService {
 
     if ( /\/0(?!\d)/.test(operando)) {
       return throwError(() => new Error('No se puede dividir por cero'));
+    }
+
+    if ( apertura > cierre ){
+      operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
+      operando += ')';
+    } else if ( cierre > apertura || cierre === apertura ) {
+      operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
     }
 
     try {
