@@ -14,16 +14,16 @@
       <img src="images/delete.svg" alt="delete">
     </div>
 
-    <div class="history"
-    (click)="opera('history')"
-    >
-      <img src="images/history.svg" alt="history">
-    </div>
-
     <div class="div"
     (click)="opera('/')"
     >
       <img src="images/div.svg" alt="div">
+    </div>
+
+    <div class="multi"
+    (click)="opera('*')"
+    >
+      <img src="images/multi.svg" alt="multi">
     </div>
 
   </div>
@@ -49,10 +49,10 @@
       <span>9</span>
     </div>
 
-    <div class="multi"
-    (click)="opera('*')"
+    <div class="subs"
+    (click)="opera('-')"
     >
-      <img src="images/multi.svg" alt="multi">
+      <img src="images/subs.svg" alt="subs">
     </div>
 
   </div>
@@ -78,10 +78,10 @@
       <span>6</span>
     </div>
 
-    <div class="subs"
-    (click)="opera('-')"
+    <div class="plus"
+    (click)="opera('+')"
     >
-      <img src="images/subs.svg" alt="subs">
+      <img src="images/plus.svg" alt="plus">
     </div>
 
   </div>
@@ -107,16 +107,22 @@
       <span>3</span>
     </div>
 
-    <div class="plus"
-    (click)="opera('+')"
+    <div class="point"
+    (click)="opera('.')"
     >
-      <img src="images/plus.svg" alt="plus">
+      <img src="images/point.svg" alt="point">
     </div>
 
   </div>
 
 
   <div class="fila5">
+
+    <div class="paraper"
+    (click)="opera('(')"
+    >
+      <img src="images/paraper.svg" alt="paraper">
+    </div>
 
     <div class="cero"
 
@@ -125,16 +131,10 @@
       <span>0</span>
     </div>
 
-    <div class="par"
-    (click)="opera('par')"
+    <div class="parcie"
+    (click)="opera(')')"
     >
-      <img src="images/par.svg" alt="point">
-    </div>
-
-    <div class="point"
-    (click)="opera('.')"
-    >
-      <img src="images/point.svg" alt="point">
+      <img src="images/parcie.svg" alt="parcie">
     </div>
 
     <div class="equal"
@@ -144,4 +144,18 @@
     </div>
 
   </div>
+
+  <div class="fila6">
+
+    <div class="history"
+    (click)="opera('history')"
+    >
+      <h1>HISTORY</h1>
+      <img src="images/history.svg" alt="history">
+    </div>
+
+  </div>
 </div>
+
+
+

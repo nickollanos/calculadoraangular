@@ -1,0 +1,362 @@
+
+// public numeros( num : string): void {
+  //   this.operando += num;
+  //   console.log('operando.....', this.operando);
+  //   this.vOper = true;
+
+  //   // if ( this.resultado === '' ) {
+
+  //   if ( this.operador !== '' ) {
+  //     // if ( this.resultado !== ''){
+
+  //     // }
+  //     this.operador = '';
+  //     this.num2 += num;
+  //     console.log('numero 2: ', this.num2);
+  //     this.operacion( this.resultado, this.num2, this.operador);
+  //   } else {
+  //     this.resultado += num;
+  //     console.log('numero 1: ', this.resultado);
+  //   }
+
+  //   // } else {
+  //   //   this.num1 = this.resultado;
+  //   //   this.operacion( this.num1, this.num2, this.operador);
+  //   //   console.log('numero 2: ', this.num2, 'y numero resultado: ', this.num1);
+  //   // }
+  // }
+
+  // public operadores( op : string): void {
+  //   this.operador = op;
+  //   console.log('operador: ', this.operador);
+  //   if( ['+', '-', '*', '/'].includes(op.slice(-1)) ) {
+  //     this.operando += op;
+  //     console.log('operando.....', this.operando);
+
+  //   } else if (op === 'c') {
+  //     this.limpiar();
+
+  //   } else if (op === '=') {
+  //     this.operacion(this.num1, this.num2, this.operador);
+
+  //   } else if (op === 'delete') {
+  //     this.delete(this.num1, this.num2, this.operador);
+
+  //   }
+  // }
+
+  // public recibidoDato(dato: string): void {
+  //   // console.log('dato recibido: ', dato);
+
+  //   console.log(this.operando);
+
+
+  //   if ( this.resultado === '') {
+  //     this.operando += dato;
+  //     this.num2 += dato;
+  //     console.log(this.num2);
+
+  //       if( ['+', '-', '*', '/', 'history'].includes(dato.slice(-1))) {
+  //         this.operador = dato;
+  //         console.log(this.operador);
+
+
+
+  //         if ( this.num1 === '' ){
+  //           this.num1 = this.num2;
+  //           console.log(this.num1);
+  //           this.num2 = '';
+
+  //         } else {
+  //           this.operacion(this.num1, this.num2, this.operador);
+  //           this.num2 = '';
+
+  //         }
+
+  //       } else if (dato === 'c') {
+  //         this.limpiar();
+
+  //       } else if (dato === '=') {
+  //         this.operacion(this.num1, this.num2, this.operador);
+
+  //       } else if (dato === 'delete') {
+  //         this.delete(this.num1, this.num2, this.operador);
+
+  //       }
+
+  //   } else {
+  //     this.operando = '';
+  //     this.num2 = this.resultado;
+  //     this.resultado = '';
+  //     this.operando += this.num2;
+  //     if( ['+', '-', '*', '/', 'history'].includes(dato.slice(-1))) {
+  //       this.operador = dato;
+  //       console.log(this.operador);
+  //       this.num1 = this.num2;
+  //       console.log(this.num1);
+  //       this.num2 = '';
+
+  //     } else if (dato === 'c') {
+  //       this.limpiar();
+
+  //     } else if (dato === '=') {
+  //       this.operacion(this.num1, this.num2, this.operador);
+
+  //     } else if (dato === 'delete') {
+  //       this.delete(this.num1, this.num2, this.operador);
+
+  //     }
+  //   }
+
+  //   // if (this.resultado === '') {
+  //   //   if (['+', '-', '*', '/', 'history'].includes(datos.slice(-1))) {
+  //   //     if (this.num1 !== '' && this.num2 === '') {
+  //   //       this.operador = datos;
+  //   //       console.log(this.operador);
+  //   //       this.operando = this.num1 + ' ' + this.operador;
+  //   //       console.log(this.operando);
+
+  //   //     } else if (this.num1 !== '' && this.num2 !== '') {
+  //   //       this.operacion(this.num1, this.num2, this.operador);
+  //   //       this.num2 = '';
+
+  //   //     }
+
+  //   //   } else if (dato === 'c') {
+  //   //     this.limpiar();
+
+  //   //   } else if (dato === '=') {
+  //   //     this.operacion(this.num1, this.num2, this.operador);
+
+  //   //   } else if (dato === 'delete') {
+  //   //     this.delete(this.num1, this.num2, this.operador);
+
+  //   //   } else if (this.operador === '') {
+  //   //     this.num1 += datos;
+  //   //     console.log(this.num1);
+  //   //   } else {
+  //   //     this.num2 += datos;
+  //   //     console.log(this.num2);
+  //   //   }
+  //   // } else if (this.resultado !== '') {
+  //   //   if (['+', '-', '*', '/', 'history'].includes(datos.slice(-1))) {
+  //   //     if (this.num2 === '') {
+  //   //       this.operador = datos;
+  //   //       console.log(this.operador);
+  //   //       this.operando += this.resultado + ' ' + this.operador;
+  //   //     } else if (this.num2 !== '') {
+  //   //       this.operacion(this.resultado, this.num2, this.operador);
+  //   //       console.log(this.operador);
+  //   //       this.num2 = '';
+  //   //       this.operando += this.resultado + ' ' + this.operador;
+  //   //       console.log(this.operando);
+
+  //   //     }
+
+  //   //   } else if (dato === 'c') {
+  //   //     this.limpiar();
+
+  //   //   } else if (dato === '=') {
+  //   //     this.operacion(this.resultado, this.num2, this.operador);
+
+  //   //   } else if (dato === 'delete') {
+  //   //     this.delete(this.resultado, this.num2, this.operador);
+
+  //   //   } else if (this.operador === '') {
+  //   //     this.resultado += datos;
+  //   //     console.log(this.resultado);
+  //   //   } else {
+  //   //     this.num2 += datos;
+  //   //     console.log(this.num2);
+  //   //   }
+  //   // }
+
+  // }
+
+
+
+
+  // multiplicar( num1 : string, num2 : string) : void {
+    //   this.calculosService.multiplicarDatos(num1, num2).subscribe({
+    //     next: (result) => {
+    //       this.resultado = result;
+    //     },
+    //     error: (err) => {
+    //       this.error = err;
+    //     }
+    //   });
+    // }
+
+    // dividir( num1 : string, num2 : string) : void {
+    //   this.calculosService.dividirDatos(num1, num2).subscribe({
+    //     next: (result) => {
+    //       this.resultado = result;
+    //     },
+    //     error: (err) => {
+    //       this.error = err;
+    //     }
+    //   });
+    // }
+
+    // sumar( num1 : string, num2 : string ) : void {
+    //   this.calculosService.sumarDatos(num1, num2).subscribe({
+    //     next: (result) => {
+    //       this.resultado = result;
+    //     },
+    //     error: (err) => {
+    //       this.error = err;
+    //     }
+    //   });
+    // }
+
+    // restar( num1 : string, num2 : string) : void {
+    //   this.calculosService.restarDatos(num1, num2).subscribe({
+    //     next: (result) => {
+    //       this.resultado = result;
+    //     },
+    //     error: (err) => {
+    //       this.error = err;
+    //     }
+    //   });
+    // }
+
+
+    // multiplicarDatos ( num1 : string, num2 : string) : Observable<string> {
+      //   return new Observable<string>(observer => {
+      //     try {
+      //       let num1c = parseFloat(num1);
+      //       console.log(num1c);
+      //       let num2c = parseFloat(num2);
+      //       console.log(num2c);
+      //       let results = num1c * num2c;
+      //       if ( results % 1 === 0 ){
+      //         let result = results.toFixed(0);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       } else {
+      //         let result = results.toFixed(2);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       }
+
+      //     } catch (error) {
+      //       observer.error(error);
+      //     }
+      //   }).pipe(
+      //     catchError(error => {
+      //       console.error('Error en la multiplicacion', error.message);
+      //       return of('Error en la multiplicacion');
+      //     })
+      //   );
+      // }
+
+      // dividirDatos ( num1 : string, num2 : string) : Observable<string> {
+      //   return new Observable<string>(observer => {
+      //     try {
+      //       let num1c = parseFloat(num1);
+      //       console.log(num1c);
+      //       let num2c = parseFloat(num2);
+      //       console.log(num2c);
+      //       if( num2c === 0 ){
+      //         throw new Error('No se puede dividir por cero');
+      //       }
+      //       let results = num1c / num2c;
+      //       if ( results % 1 === 0 ){
+      //         let result = results.toFixed(0);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       } else {
+      //         let result = results.toFixed(2);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       }
+      //     } catch (error) {
+      //       observer.error(error);
+      //     }
+      //   }).pipe(
+      //     catchError(error => {
+      //       console.error('Error al dividir por cero', error.message);
+      //       return of('Error no se puede dividir por cero');
+      //     })
+      //   );
+      // }
+
+      // sumarDatos ( num1 : string, num2 : string) : Observable<string> {
+      //   return new Observable<string>(observer => {
+      //     try {
+      //       let num1c = parseFloat(num1);
+      //       console.log(num1c);
+      //       let num2c = parseFloat(num2);
+      //       console.log(num2c);
+      //       let results = num1c + num2c;
+      //       if ( results % 1 === 0 ){
+      //         let result = results.toFixed(0);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       } else {
+      //         let result = results.toFixed(2);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       }
+      //     } catch (error) {
+      //       observer.error(error);
+      //     }
+      //   }).pipe(
+      //     catchError(error => {
+      //       console.error('Error en la suma', error.message);
+      //       return of('Error en la suma');
+      //     })
+      //   );
+      // }
+
+      // restarDatos ( num1 : string, num2 : string) : Observable<string> {
+      //   return new Observable<string>(observer => {
+      //     try {
+      //       let num1c = parseFloat(num1);
+      //       console.log(num1c);
+      //       let num2c = parseFloat(num2);
+      //       console.log(num2c);
+      //       let results = num1c - num2c;
+      //       if ( results % 1 === 0 ){
+      //         let result = results.toFixed(0);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       } else {
+      //         let result = results.toFixed(2);
+      //         console.log(result);
+      //         observer.next(result.toString());
+      //         observer.complete();
+      //       }
+      //     } catch (error) {
+      //       observer.error(error);
+      //     }
+      //   }).pipe(
+      //     catchError(error => {
+      //       console.error('Error en la resta', error.message);
+      //       return of('Error en la resta');
+      //     })
+      //   );
+      // }
+
+
+
+      // switch (operador) {
+        //   case '+':
+        //   console.log(num1);
+        //   return this.sumarDatos(num1, num2);
+        //   case '-':
+        //   return this.restarDatos(num1, num2);
+        //   case '*':
+        //   return this.multiplicarDatos(num1, num2);
+        //   case '/':
+        //   return this.dividirDatos(num1, num2);
+        //   default:
+        //     return of ('');
+        // }

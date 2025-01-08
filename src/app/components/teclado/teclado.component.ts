@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Datos } from '../../app.types';
+import { Component, EventEmitter, Output } from '@angular/core'
 
 
 @Component({
@@ -36,8 +35,10 @@ export class TecladoComponent {
       this.operador.emit('.');
     } else if (key === 'c') {
       this.operador.emit('c');
-    } else if (key === '(' || key === ')') {
-      this.operador.emit('par');
+    } else if (key === '(') {
+      this.operador.emit('(');
+    }else if (key === ')') {
+      this.operador.emit(')');
     }
 
 

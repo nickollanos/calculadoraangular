@@ -33,6 +33,8 @@ export class AppComponent {
 
   public operadores ( num : string ) {
     console.log(num);
+    this.hLetra = 2.8;
+    this.sLetra = 2;
 
     if (this.operando === '' && num === '-' ){
       this.operando += '-';
@@ -49,30 +51,39 @@ export class AppComponent {
       return;
     }
 
-    console.log(num);
-    if ( num === 'par' ){
-      let apertura = (this.operando.match(/\(/g) || []).length;
-      console.log(apertura);
-
-      let cierre = (this.operando.match(/\)/g) || []).length;
-      console.log(cierre);
-
-      if ( apertura > cierre ){
-        this.operando += ')';
-        num = '';
-        return;
-      } else if ( cierre > apertura ) {
-        this.operando += '(';
-        num = '';
-      } else if ( cierre === apertura ){
-        this.operando += '(';
-        num = '';
-        return;
-      }
+    if ( /^[+\-/*]/.test( this.operando[this.operando.length-1] ) && /^[+\-/*]/.test( num ) ) {
+      this.operando = this.operando.replace(this.operando[this.operando.length-1], num);
+      return;
     }
 
-    if ( this.operando === '' && num === '.' && num.length === 1 ) return;
+    console.log(num);
+
+    if ( /^[+\/*]/.test( num ) &&  ( this.operando[this.operando.length-1] === '(' || this.operando[this.operando.length-1] === ')' ) ){
+      num = '';
+      return;
+    }
+
+    if ( this.operando === '' && num === '.' && num.length === 1 ){
+      this.operando += '0.';
+      this.vOper = true;
+      this.resultado = '0';
+      console.log(this.operando);
+
+      return;
+    }
     console.log(this.operando);
+
+    if ( num === '(' && this.operando === '' ) {
+      this.operando += '(';
+      this.vOper = true;
+      this.resultado = '0';
+      return;
+    } else if ( num === ')' && this.operando === '' ){
+      return;
+    } else if ( num === '(' ){
+      this.operando += '(';
+      return;
+    }
 
     if ( this.operando === '' ) {
       this.hLetra = 2.8;
@@ -88,20 +99,69 @@ export class AppComponent {
       } else if ( num === '=' ){
         this.hLetra = 1.5;
         this.sLetra = 2.6;
-        this.operando = '';
+        this.operando = this.resultado;
       }
 
     } else {
 
+      if ( num === '+'){
+        if  ( this.operando[this.operando.length-1] === '+' || this.operando[this.operando.length-1] === '-' ){
+          this.operando = this.operando.replace(this.operando[this.operando.length-1], num);
+          return;
+        }
+
+        if ( this.operando[this.operando.length-1] === '*' || this.operando[this.operando.length-1] === '/' ){
+          num = '';
+          return;
+        }
+      }
+
+      if ( num === '-'){
+        if  ( this.operando[this.operando.length-1] === '+' || this.operando[this.operando.length-1] === '-' ){
+          this.operando = this.operando.replace(this.operando[this.operando.length-1], num);
+          return;
+        }
+
+        if ( this.operando[this.operando.length-1] === '*'){
+          num = '';
+          return;
+        }
+      }
+
+      if ( num === '-' && this.operando[this.operando.length-1] === '/' ) {
+        this.operando += num;
+        return;
+      }
+
+      if ( num === '*' || num === '/' ){
+        if ( this.operando[this.operando.length-1] === '*' || this.operando[this.operando.length-1] === '/' ){
+          this.operando = this.operando.replace(this.operando[this.operando.length-1], num);
+          return;
+        }
+
+        if ( this.operando[this.operando.length-1] === '+' || this.operando[this.operando.length-1] === '-' ){
+          num = '';
+          return;
+        }
+      }
+
       this.operando += num;
+
+      let ultimos = this.operando.slice(-2);
+      console.log(ultimos);
+
+
+      if ( ultimos === '()' ) {
+        this.operando = this.operando.slice(0, -1);
+        return;
+      } else if ( ultimos === '(-' ){
+        return;
+      }
 
       console.log(this.operando);
 
       console.log(/^[+\/*]/.test( this.operando[this.operando.length-1] ));
       console.log(this.operando[this.operando.length-2] === ')');
-
-
-      if ( /^[+\-/*]/.test( this.operando[this.operando.length-1] ) &&  this.operando[this.operando.length-2] === ')') return;
 
       if (/^[+\/*]/.test(this.operando[0]) ){
         this.operando = '';
@@ -116,180 +176,6 @@ export class AppComponent {
     }
 
   }
-
-  // public numeros( num : string): void {
-  //   this.operando += num;
-  //   console.log('operando.....', this.operando);
-  //   this.vOper = true;
-
-  //   // if ( this.resultado === '' ) {
-
-  //   if ( this.operador !== '' ) {
-  //     // if ( this.resultado !== ''){
-
-  //     // }
-  //     this.operador = '';
-  //     this.num2 += num;
-  //     console.log('numero 2: ', this.num2);
-  //     this.operacion( this.resultado, this.num2, this.operador);
-  //   } else {
-  //     this.resultado += num;
-  //     console.log('numero 1: ', this.resultado);
-  //   }
-
-  //   // } else {
-  //   //   this.num1 = this.resultado;
-  //   //   this.operacion( this.num1, this.num2, this.operador);
-  //   //   console.log('numero 2: ', this.num2, 'y numero resultado: ', this.num1);
-  //   // }
-  // }
-
-  // public operadores( op : string): void {
-  //   this.operador = op;
-  //   console.log('operador: ', this.operador);
-  //   if( ['+', '-', '*', '/'].includes(op.slice(-1)) ) {
-  //     this.operando += op;
-  //     console.log('operando.....', this.operando);
-
-  //   } else if (op === 'c') {
-  //     this.limpiar();
-
-  //   } else if (op === '=') {
-  //     this.operacion(this.num1, this.num2, this.operador);
-
-  //   } else if (op === 'delete') {
-  //     this.delete(this.num1, this.num2, this.operador);
-
-  //   }
-  // }
-
-  // public recibidoDato(dato: string): void {
-  //   // console.log('dato recibido: ', dato);
-
-  //   console.log(this.operando);
-
-
-  //   if ( this.resultado === '') {
-  //     this.operando += dato;
-  //     this.num2 += dato;
-  //     console.log(this.num2);
-
-  //       if( ['+', '-', '*', '/', 'history'].includes(dato.slice(-1))) {
-  //         this.operador = dato;
-  //         console.log(this.operador);
-
-
-
-  //         if ( this.num1 === '' ){
-  //           this.num1 = this.num2;
-  //           console.log(this.num1);
-  //           this.num2 = '';
-
-  //         } else {
-  //           this.operacion(this.num1, this.num2, this.operador);
-  //           this.num2 = '';
-
-  //         }
-
-  //       } else if (dato === 'c') {
-  //         this.limpiar();
-
-  //       } else if (dato === '=') {
-  //         this.operacion(this.num1, this.num2, this.operador);
-
-  //       } else if (dato === 'delete') {
-  //         this.delete(this.num1, this.num2, this.operador);
-
-  //       }
-
-  //   } else {
-  //     this.operando = '';
-  //     this.num2 = this.resultado;
-  //     this.resultado = '';
-  //     this.operando += this.num2;
-  //     if( ['+', '-', '*', '/', 'history'].includes(dato.slice(-1))) {
-  //       this.operador = dato;
-  //       console.log(this.operador);
-  //       this.num1 = this.num2;
-  //       console.log(this.num1);
-  //       this.num2 = '';
-
-  //     } else if (dato === 'c') {
-  //       this.limpiar();
-
-  //     } else if (dato === '=') {
-  //       this.operacion(this.num1, this.num2, this.operador);
-
-  //     } else if (dato === 'delete') {
-  //       this.delete(this.num1, this.num2, this.operador);
-
-  //     }
-  //   }
-
-  //   // if (this.resultado === '') {
-  //   //   if (['+', '-', '*', '/', 'history'].includes(datos.slice(-1))) {
-  //   //     if (this.num1 !== '' && this.num2 === '') {
-  //   //       this.operador = datos;
-  //   //       console.log(this.operador);
-  //   //       this.operando = this.num1 + ' ' + this.operador;
-  //   //       console.log(this.operando);
-
-  //   //     } else if (this.num1 !== '' && this.num2 !== '') {
-  //   //       this.operacion(this.num1, this.num2, this.operador);
-  //   //       this.num2 = '';
-
-  //   //     }
-
-  //   //   } else if (dato === 'c') {
-  //   //     this.limpiar();
-
-  //   //   } else if (dato === '=') {
-  //   //     this.operacion(this.num1, this.num2, this.operador);
-
-  //   //   } else if (dato === 'delete') {
-  //   //     this.delete(this.num1, this.num2, this.operador);
-
-  //   //   } else if (this.operador === '') {
-  //   //     this.num1 += datos;
-  //   //     console.log(this.num1);
-  //   //   } else {
-  //   //     this.num2 += datos;
-  //   //     console.log(this.num2);
-  //   //   }
-  //   // } else if (this.resultado !== '') {
-  //   //   if (['+', '-', '*', '/', 'history'].includes(datos.slice(-1))) {
-  //   //     if (this.num2 === '') {
-  //   //       this.operador = datos;
-  //   //       console.log(this.operador);
-  //   //       this.operando += this.resultado + ' ' + this.operador;
-  //   //     } else if (this.num2 !== '') {
-  //   //       this.operacion(this.resultado, this.num2, this.operador);
-  //   //       console.log(this.operador);
-  //   //       this.num2 = '';
-  //   //       this.operando += this.resultado + ' ' + this.operador;
-  //   //       console.log(this.operando);
-
-  //   //     }
-
-  //   //   } else if (dato === 'c') {
-  //   //     this.limpiar();
-
-  //   //   } else if (dato === '=') {
-  //   //     this.operacion(this.resultado, this.num2, this.operador);
-
-  //   //   } else if (dato === 'delete') {
-  //   //     this.delete(this.resultado, this.num2, this.operador);
-
-  //   //   } else if (this.operador === '') {
-  //   //     this.resultado += datos;
-  //   //     console.log(this.resultado);
-  //   //   } else {
-  //   //     this.num2 += datos;
-  //   //     console.log(this.num2);
-  //   //   }
-  //   // }
-
-  // }
 
   delete( operando : string ): void {
     this.calculosService.deleteDatos(operando ).subscribe({
@@ -342,49 +228,5 @@ export class AppComponent {
       }
     });
   }
-
-  // multiplicar( num1 : string, num2 : string) : void {
-  //   this.calculosService.multiplicarDatos(num1, num2).subscribe({
-  //     next: (result) => {
-  //       this.resultado = result;
-  //     },
-  //     error: (err) => {
-  //       this.error = err;
-  //     }
-  //   });
-  // }
-
-  // dividir( num1 : string, num2 : string) : void {
-  //   this.calculosService.dividirDatos(num1, num2).subscribe({
-  //     next: (result) => {
-  //       this.resultado = result;
-  //     },
-  //     error: (err) => {
-  //       this.error = err;
-  //     }
-  //   });
-  // }
-
-  // sumar( num1 : string, num2 : string ) : void {
-  //   this.calculosService.sumarDatos(num1, num2).subscribe({
-  //     next: (result) => {
-  //       this.resultado = result;
-  //     },
-  //     error: (err) => {
-  //       this.error = err;
-  //     }
-  //   });
-  // }
-
-  // restar( num1 : string, num2 : string) : void {
-  //   this.calculosService.restarDatos(num1, num2).subscribe({
-  //     next: (result) => {
-  //       this.resultado = result;
-  //     },
-  //     error: (err) => {
-  //       this.error = err;
-  //     }
-  //   });
-  // }
 
 }

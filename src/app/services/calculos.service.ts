@@ -61,7 +61,11 @@ export class CalculosService {
 
     let formato = /^[0-9+\-*/().\s]*$/;
     let apertura = (operando.match(/\(/g) || []).length;
+    console.log(apertura);
+
     let cierre = (operando.match(/\)/g) || []).length;
+    console.log(cierre);
+
 
     if ( !formato.test(operando) ){
       return throwError(() => new Error('Expresion matematica invalida'));
@@ -77,7 +81,8 @@ export class CalculosService {
 
     if ( apertura > cierre ){
       operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
-      operando += ')';
+      let diferencia = apertura - cierre;
+      operando += ')'.repeat(diferencia);
     } else if ( cierre > apertura || cierre === apertura ) {
       operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
     }
@@ -115,144 +120,5 @@ export class CalculosService {
     } catch (error) {
       return throwError( () => new Error('Error al realizar la operacion'));
     }
-
-    // switch (operador) {
-    //   case '+':
-    //   console.log(num1);
-    //   return this.sumarDatos(num1, num2);
-    //   case '-':
-    //   return this.restarDatos(num1, num2);
-    //   case '*':
-    //   return this.multiplicarDatos(num1, num2);
-    //   case '/':
-    //   return this.dividirDatos(num1, num2);
-    //   default:
-    //     return of ('');
-    // }
   }
-
-  // multiplicarDatos ( num1 : string, num2 : string) : Observable<string> {
-  //   return new Observable<string>(observer => {
-  //     try {
-  //       let num1c = parseFloat(num1);
-  //       console.log(num1c);
-  //       let num2c = parseFloat(num2);
-  //       console.log(num2c);
-  //       let results = num1c * num2c;
-  //       if ( results % 1 === 0 ){
-  //         let result = results.toFixed(0);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       } else {
-  //         let result = results.toFixed(2);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       }
-
-  //     } catch (error) {
-  //       observer.error(error);
-  //     }
-  //   }).pipe(
-  //     catchError(error => {
-  //       console.error('Error en la multiplicacion', error.message);
-  //       return of('Error en la multiplicacion');
-  //     })
-  //   );
-  // }
-
-  // dividirDatos ( num1 : string, num2 : string) : Observable<string> {
-  //   return new Observable<string>(observer => {
-  //     try {
-  //       let num1c = parseFloat(num1);
-  //       console.log(num1c);
-  //       let num2c = parseFloat(num2);
-  //       console.log(num2c);
-  //       if( num2c === 0 ){
-  //         throw new Error('No se puede dividir por cero');
-  //       }
-  //       let results = num1c / num2c;
-  //       if ( results % 1 === 0 ){
-  //         let result = results.toFixed(0);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       } else {
-  //         let result = results.toFixed(2);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       }
-  //     } catch (error) {
-  //       observer.error(error);
-  //     }
-  //   }).pipe(
-  //     catchError(error => {
-  //       console.error('Error al dividir por cero', error.message);
-  //       return of('Error no se puede dividir por cero');
-  //     })
-  //   );
-  // }
-
-  // sumarDatos ( num1 : string, num2 : string) : Observable<string> {
-  //   return new Observable<string>(observer => {
-  //     try {
-  //       let num1c = parseFloat(num1);
-  //       console.log(num1c);
-  //       let num2c = parseFloat(num2);
-  //       console.log(num2c);
-  //       let results = num1c + num2c;
-  //       if ( results % 1 === 0 ){
-  //         let result = results.toFixed(0);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       } else {
-  //         let result = results.toFixed(2);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       }
-  //     } catch (error) {
-  //       observer.error(error);
-  //     }
-  //   }).pipe(
-  //     catchError(error => {
-  //       console.error('Error en la suma', error.message);
-  //       return of('Error en la suma');
-  //     })
-  //   );
-  // }
-
-  // restarDatos ( num1 : string, num2 : string) : Observable<string> {
-  //   return new Observable<string>(observer => {
-  //     try {
-  //       let num1c = parseFloat(num1);
-  //       console.log(num1c);
-  //       let num2c = parseFloat(num2);
-  //       console.log(num2c);
-  //       let results = num1c - num2c;
-  //       if ( results % 1 === 0 ){
-  //         let result = results.toFixed(0);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       } else {
-  //         let result = results.toFixed(2);
-  //         console.log(result);
-  //         observer.next(result.toString());
-  //         observer.complete();
-  //       }
-  //     } catch (error) {
-  //       observer.error(error);
-  //     }
-  //   }).pipe(
-  //     catchError(error => {
-  //       console.error('Error en la resta', error.message);
-  //       return of('Error en la resta');
-  //     })
-  //   );
-  // }
-
 }
