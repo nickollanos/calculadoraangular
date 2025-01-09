@@ -19,9 +19,11 @@ export class AppComponent {
   title = 'calculadora';
 
   public resultado: string = '';
-  public history: string = '';
+  public result: string = '';
+  public history: string[] = [];
   public vHistory: boolean = false;
   public vOper: boolean = false;
+  public vConver: boolean = true;
   public error: string = '';
   public operando: string = '';
   public hLetra: number = 2.8;
@@ -31,12 +33,20 @@ export class AppComponent {
     private calculosService: CalculosService
   ) { }
 
-  public operadores ( num : string ) {
+  public operadores ( num : string ) : void {
     console.log(num);
     this.hLetra = 2.8;
     this.sLetra = 2;
+    console.log(this.operando);
+    console.log(this.resultado);
 
-    if (this.operando === '' && num === '-' ){
+    if ( this.operando !== '' && this.resultado === '' && /\d/.test(num) ){
+      this.operando = '';
+      this.operando += num;
+      num = '';
+    }
+
+    if ( this.operando === '' && num === '-' ){
       this.operando += '-';
       this.resultado += '0';
       console.log(this.operando);
@@ -51,14 +61,27 @@ export class AppComponent {
       return;
     }
 
-    if ( /^[+\-/*]/.test( this.operando[this.operando.length-1] ) && /^[+\-/*]/.test( num ) ) {
-      this.operando = this.operando.replace(this.operando[this.operando.length-1], num);
+    let ultimocis = this.operando[this.operando.length-1];
+    console.log(ultimocis);
+
+
+    if ( /^[+\-/*]/.test( ultimocis ) && /^[+\-/*)]/.test( num ) ) {
+      this.operando = this.operando.slice(0, -1);
+      this.operando += num;
+      console.log(this.operando);
+      num = '';
       return;
     }
 
     console.log(num);
 
-    if ( /^[+\/*]/.test( num ) &&  ( this.operando[this.operando.length-1] === '(' || this.operando[this.operando.length-1] === ')' ) ){
+    if ( ultimocis === '/' && num === '0' ){
+      this.operando += num;
+      num = '';
+      return;
+    }
+
+    if ( /^[+\/*]/.test( num ) &&   this.operando[this.operando.length-1] === '('){
       num = '';
       return;
     }
@@ -69,6 +92,10 @@ export class AppComponent {
       this.resultado = '0';
       console.log(this.operando);
 
+      return;
+    } else if ( this.operando !== '' && num === '.' ) {
+      this.operando += '.';
+      num = '';
       return;
     }
     console.log(this.operando);
@@ -97,9 +124,23 @@ export class AppComponent {
       } else if ( num === 'c' ) {
         this.limpiar();
       } else if ( num === '=' ){
+        this.historico( this.operando, this.resultado );
         this.hLetra = 1.5;
         this.sLetra = 2.6;
         this.operando = this.resultado;
+        this.result = this.resultado;
+        this.resultado = '';
+      } else if ( num === 'history' ){
+        num = '';
+        if ( this.vHistory === false && this.vConver === true ) {
+          this.vHistory = true;
+          this.vConver = false;
+          return;
+        } else if ( this.vHistory === true && this.vConver === false ) {
+          this.vHistory = false;
+          this.vConver = true;
+        }
+
       }
 
     } else {
@@ -147,6 +188,10 @@ export class AppComponent {
 
       this.operando += num;
 
+      if ( /^[0-9+\-/*().]+$/.test(this.operando) ) {
+        this.operando = this.operando.replace(/\b0+(\d)/g, '$1');
+      }
+
       let ultimos = this.operando.slice(-2);
       console.log(ultimos);
 
@@ -177,7 +222,7 @@ export class AppComponent {
 
   }
 
-  delete( operando : string ): void {
+  public delete( operando : string ): void {
     this.calculosService.deleteDatos(operando ).subscribe({
       next: (result) => {
           this.operando = result;
@@ -196,10 +241,19 @@ export class AppComponent {
     if ( this.operando[this.operando.length-1] === '(' ) {
       return;
     }
+    let ultimocis = this.operando[this.operando.length-1];
+    let ultimos = this.operando.substring(this.operando.length-2);
+    console.log(ultimos);
+
+    if ( ultimocis === '.') {
+      return;
+    } else if ( ultimos === '/0' ) {
+      return;
+    }
     this.operacion( this.operando );
   }
 
-  operacion( operacion: string ): void {
+  public operacion( operacion: string ): void {
 
     console.log(operacion);
 
@@ -215,7 +269,7 @@ export class AppComponent {
     });
   }
 
-  limpiar(): void {
+  public limpiar(): void {
     this.calculosService.limpiarDatos().subscribe({
       next: (result: Limpiador) => {
         this.operando = result.operador;
@@ -227,6 +281,16 @@ export class AppComponent {
         this.error = err;
       }
     });
+  }
+
+  public historico( operando : string, resultado: string ): void {
+    console.log(operando);
+    console.log(resultado);
+    let historial = operando + '=' + resultado;
+    console.log(historial);
+
+    this.history.push(historial);
+
   }
 
 }

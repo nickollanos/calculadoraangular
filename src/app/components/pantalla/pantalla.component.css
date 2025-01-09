@@ -12,19 +12,43 @@ div.error{
 }
 
 div.hist{
-  height: 30vh;
-  width: 17vw;
+  width: 90%;
+  margin-left: 1rem;
   display: flex;
-  align-items: end;
-  justify-content: end;
-  margin-bottom: 0;
-  padding-right: 1rem;
+  flex-direction: column;
+  max-height: 10rem;
+  overflow-y: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
 
-  h1{
-    font-family: 'digital-7.ttf', sans-serif;
-    font-weight: 600;
-    font-size: 1.7rem;
+  div.inter{
+    display: flex;
+    flex-direction: row;
+    width: 98%;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    h1{
+      font-family: 'digital-7.ttf', sans-serif;
+      width: 87%;
+      font-weight: 600;
+      font-size: 1.7rem;
+      word-wrap: break-word;
+    }
+
+    span{
+
+      img{
+        height: 1.5rem;
+      }
+    }
   }
+
+  div.inter:hover{
+    background-color: rgb(167, 162, 162);
+  }
+
 }
 
 div.conver{
@@ -41,9 +65,14 @@ div.conver{
     height: 100%;
     display: flex;
     flex-direction: row;
+    max-height: 10rem;
     align-items: center;
     justify-content: flex-end;
+    overflow-y: auto;
+    overflow-y: scroll;
     overflow-x: hidden;
+    scrollbar-width: none;
+
 
     h1{
       font-family: 'digital-7.ttf', sans-serif;
@@ -52,7 +81,18 @@ div.conver{
       text-align: left;
       overflow: hidden;
       text-overflow: clip;
+      word-wrap: break-word;
+      animation: moverTexto 10s linear infinite;
 
+    }
+
+    @keyframes moverTexto {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
     }
 
   }

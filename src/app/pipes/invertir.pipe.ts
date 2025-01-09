@@ -6,16 +6,21 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class InvertirPipe implements PipeTransform {
 
-  transform(value: string): string {
+  transform(value: string, intervalo: number = 10): string {
 
-    let operadores = ['+', '-', '/', '*'];
+    let textoMostrado = '';
 
-    let valorInvertido = value.split('').reverse().join('');
+    if (value) {
+      let index = 0;
+      const interval = setInterval(() => {
+        textoMostrado += value.charAt(index);
+        index++;
+        if (index === value.length) {
+          clearInterval(interval);
+        }
+      }, intervalo);
+    }
 
-    operadores.forEach(operador =>
-    {
-      valorInvertido = valorInvertido.replace(operador, `${operador}`)
-    });
-    return valorInvertido;
+    return textoMostrado;
   }
 }

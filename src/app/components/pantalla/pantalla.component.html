@@ -7,18 +7,26 @@
 <div class="hist"
 *ngIf="!error && vHistory"
 >
-  <h1>{{ history }}</h1>
+  <div class="inter"
+  *ngFor="let historico of history"
+  >
+    <h1
+    >{{ historico }}</h1>
+    <span>
+      <img src="images/eliminar.svg" alt="delete">
+    </span>
+  </div>
 </div>
 
 <div class="conver"
-*ngIf="!error"
+*ngIf="!error && vConver"
 >
   <div class="oper"
   *ngIf="!error && vOper"
   >
     <h1
     [style.font-size]="hLetra +'rem'"
-    >{{ operando }}
+    >{{ operando | invertir }}
   </h1>
   </div>
 
@@ -27,6 +35,6 @@
   >
     <span
     [style.font-size]="sLetra +'rem'"
-    >= {{ resultado || '0' | scientific:2 }}</span>
+    >= {{ resultado || result || '0' | scientific:2 }}</span>
   </div>
 </div>

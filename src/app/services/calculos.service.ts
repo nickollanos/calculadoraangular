@@ -75,17 +75,23 @@ export class CalculosService {
       operando = operando.slice(0, -1);
     }
 
-    if ( /\/0(?!\d)/.test(operando)) {
+    if ( /\/0(?![\d\.])/.test(operando)) {
       return throwError(() => new Error('No se puede dividir por cero'));
     }
 
+    operando = operando.replace(/(\d)\.\(/g, '$1.0*(');
+
     if ( apertura > cierre ){
-      operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
+      operando = operando.replace(/(\d)(\()/g, '$1*(');
       let diferencia = apertura - cierre;
       operando += ')'.repeat(diferencia);
     } else if ( cierre > apertura || cierre === apertura ) {
-      operando = operando.replace(/(?<![+\-*/])\(/g, '*(');
+      operando = operando.replace(/(\d)(\()/g, '$1*(');
     }
+
+    operando = operando.replace(/(?<=[1-9\(])\)(?=\S)/g, ')*').replace(/\)(?=$)/g, ')');
+    console.log(operando);
+
 
     try {
       let datitos = operando.substring(0, 2);
