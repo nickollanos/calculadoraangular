@@ -360,3 +360,17 @@
         //   default:
         //     return of ('');
         // }
+
+
+        html
+#operations
+ts
+implements AfterViewChecked
+@ViewChild('operations') operationsDiv!: ElementRef;
+scrollToBottom(): void {
+    const element = this.operationsDiv.nativeElement;
+    element.scrollTop = element.scrollHeight;
+  }
+  ngAfterViewChecked(): void {
+    this.scrollToBottom();
+  }

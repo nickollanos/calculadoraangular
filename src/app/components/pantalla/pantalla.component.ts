@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ScientificPipe } from '../../pipes/scientific.pipe';
 import { InvertirPipe } from "../../pipes/invertir.pipe";
 
@@ -9,12 +9,18 @@ import { InvertirPipe } from "../../pipes/invertir.pipe";
   imports: [
     CommonModule,
     ScientificPipe,
-    InvertirPipe
 ],
   templateUrl: './pantalla.component.html',
   styleUrl: './pantalla.component.css'
 })
-export class PantallaComponent {
+export class PantallaComponent implements AfterViewInit{
+@Output()
+historialEliminado: EventEmitter<string> = new EventEmitter<string>();
+@Output()
+historialUnico: EventEmitter<string> = new EventEmitter<string>();
+
+@ViewChild
+('oper')operationsDiv!: ElementRef;
 
 @Input()
 public resultado: string = '';
@@ -37,8 +43,36 @@ public hLetra: number = 0;
 @Input()
 public sLetra: number = 0;
 
- constructor() {
+public historial: string = '';
 
- }
+
+constructor() {
+
+}
+
+ngAfterViewInit(): void {
+  if (this.operationsDiv) {
+    this.scrollToBottom();
+  }
+}
+
+scrollToBottom(): void {
+  if (this.operationsDiv && this.operationsDiv.nativeElement) {
+    const element = this.operationsDiv.nativeElement;
+    element.scrollTop = element.scrollHeight;
+  }
+}
+
+public eliminarHistoricos(historial: string): void {
+  console.log(historial);
+  this.historialEliminado.emit(historial);
+
+}
+
+public mostrarDato( historial: string ) {
+  historial = historial.split('=')[0];
+  console.log(historial);
+  this.historialUnico.emit(historial);
+}
 
 }

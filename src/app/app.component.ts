@@ -31,10 +31,28 @@ export class AppComponent {
 
   constructor(
     private calculosService: CalculosService
-  ) { }
+  ) {
+    this.cargarLocalStorage();
+  }
+
+  public historialUnico ( hist : string) : void {
+    this.vHistory = false;
+    this.vConver = true;
+    this.operadores(hist);
+  }
 
   public operadores ( num : string ) : void {
     console.log(num);
+    if (num !== 'history' && this.vHistory === true && this.vConver === false ){
+      this.vHistory = false;
+      this.vConver = true;
+    }
+
+    let apertura = (this.operando.match(/\(/g) || []).length;
+    let cierre = (this.operando.match(/\)/g) || []).length;
+
+    if ( !this.operando.includes('(') && num === ')' || apertura === cierre && num === ')' ) return;
+
     this.hLetra = 2.8;
     this.sLetra = 2;
     console.log(this.operando);
@@ -77,6 +95,14 @@ export class AppComponent {
 
     if ( ultimocis === '/' && num === '0' ){
       this.operando += num;
+      num = '';
+      return;
+    }
+
+    let numeros = this.operando.split(/[+\-/*()]/);
+    let fraccion = numeros[numeros.length - 1];
+
+    if ( fraccion.includes('.') && num === '.' ){
       num = '';
       return;
     }
@@ -131,6 +157,8 @@ export class AppComponent {
         this.result = this.resultado;
         this.resultado = '';
       } else if ( num === 'history' ){
+        console.log(num);
+
         num = '';
         if ( this.vHistory === false && this.vConver === true ) {
           this.vHistory = true;
@@ -272,10 +300,11 @@ export class AppComponent {
   public limpiar(): void {
     this.calculosService.limpiarDatos().subscribe({
       next: (result: Limpiador) => {
-        this.operando = result.operador;
+        this.operando = result.resul;
         this.resultado = result.resul;
         this.error = result.resul;
-        console.log('Datos limpiados');
+        this.result = result.resul;
+        console.log('Datos limpiados' + this.resultado);
       },
       error: (err) => {
         this.error = err;
@@ -289,8 +318,43 @@ export class AppComponent {
     let historial = operando + '=' + resultado;
     console.log(historial);
 
-    this.history.push(historial);
+    // this.history.push(historial);
+    this.organizadorHistorico( historial );
 
+  }
+
+  public organizadorHistorico ( historial : string ): void {
+    console.log(historial);
+
+    if ( this.history.includes(historial)){
+      this.eliminarHistorico(historial);
+    } else {
+    this.history.unshift( historial );
+    }
+
+    this.history = this.history.splice(0 , 20);
+    this.guardarLocalStorage();
+
+  }
+
+  public eliminarHistorico ( historial: string): void {
+    console.log(historial);
+
+    if (this.history.includes(historial)) {
+      this.history = this.history.filter((oldHistorial) => oldHistorial !== historial);
+    }
+  }
+
+  public guardarLocalStorage(): void {
+    localStorage.setItem('historial', JSON.stringify( this.history ));
+  }
+
+  public cargarLocalStorage(): void {
+    if ( !localStorage.getItem('historial')) return;
+
+    this.history = JSON.parse(localStorage.getItem('historial')!);
+
+    if ( this.history.length === 0) return;
   }
 
 }

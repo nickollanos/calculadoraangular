@@ -11,9 +11,9 @@ import { Component, EventEmitter, Output } from '@angular/core'
 export class TecladoComponent {
 
   @Output()
-  public teclas = new EventEmitter<string>();
+  public teclas: EventEmitter<string> = new EventEmitter<string>();
   @Output()
-  public operador = new EventEmitter<string>();
+  public operador: EventEmitter<string> = new EventEmitter<string>();
 
   constructor() {
 

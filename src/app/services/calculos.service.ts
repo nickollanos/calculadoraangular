@@ -88,10 +88,12 @@ export class CalculosService {
     } else if ( cierre > apertura || cierre === apertura ) {
       operando = operando.replace(/(\d)(\()/g, '$1*(');
     }
-
-    operando = operando.replace(/(?<=[1-9\(])\)(?=\S)/g, ')*').replace(/\)(?=$)/g, ')');
     console.log(operando);
-
+    // operando = operando.replace(/(?<=[1-9\(])\)(?=\S)/g, ')*').replace(/\)(?=$)/g, ')');
+    operando = operando  .replace(/(?<=[1-9\(])\)(?=\d|\.\d|\))/g, ')*')
+    .replace(/(?<=\))(?=\d|\.\d|\))/g, ')*')
+    .replace(/\)(?=$)/g, ')');
+    console.log(operando);
 
     try {
       let datitos = operando.substring(0, 2);

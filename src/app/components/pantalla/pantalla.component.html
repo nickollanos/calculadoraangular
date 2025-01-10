@@ -11,8 +11,11 @@
   *ngFor="let historico of history"
   >
     <h1
+    (click)="mostrarDato(historico)"
     >{{ historico }}</h1>
-    <span>
+    <span
+    (click)="eliminarHistoricos(historico)"
+    >
       <img src="images/eliminar.svg" alt="delete">
     </span>
   </div>
@@ -23,10 +26,11 @@
 >
   <div class="oper"
   *ngIf="!error && vOper"
+  #oper
   >
     <h1
     [style.font-size]="hLetra +'rem'"
-    >{{ operando | invertir }}
+    >{{ operando }}
   </h1>
   </div>
 
