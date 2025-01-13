@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 1400px ) {
+@media (min-width: 320px) {
 
 div.grande{
   display: flex;
@@ -9,12 +9,18 @@ div.grande{
   margin-bottom: 1rem;
   margin: 5px;
 
-  div.fila1{
+  div.fila1, div.fila2, div.fila3,
+  div.fila4, div.fila5 {
     display: flex;
     height: 2.8rem;
     gap: 15px;
 
-    div.c{
+    div.c, div.delete, div.div, div.multi,
+    div.siete, div.ocho, div.nueve, div.subs,
+    div.cuatro, div.cinco, div.seis, div.plus,
+    div.uno, div.dos, div.tres, div.point,
+    div.paraper, div.cero, div.parcie, div.equal{
+
       display: flex;
       border: solid 3px black;
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
@@ -30,365 +36,26 @@ div.grande{
         font-weight: 900;
 
       }
-    }
-
-    div.delete{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1.4rem;
-      }
-    }
-
-    div.div{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
 
       img{
         height: 1.4rem;
       }
 
-    }
-
-    div.multi{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1.2rem;
-      }
-
-    }
-  }
-
-  div.fila2{
-    display: flex;
-    height: 2.8rem;
-    gap: 1rem;
-
-    div.siete{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-    }
-
-    div.ocho{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-    }
-
-    div.nueve{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-    }
-
-    div.subs{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
+      img.subs{
         height: 0.4rem;
       }
 
-    }
-
-
-  }
-
-  div.fila3{
-    display: flex;
-    height: 2.8rem;
-    gap: 1rem;
-
-    div.cuatro{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-    }
-
-    div.cinco{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
+      img.point{
+        height: 0.5rem;
       }
 
-    }
-
-    div.seis{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
+      img.equal{
+        height: 1.0rem;
       }
-
-    }
-
-    div.plus{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1.4rem;
-      }
-
     }
 
   }
 
-  div.fila4{
-    display: flex;
-    height: 2.8rem;
-    gap: 1rem;
-
-    div.uno{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-    }
-
-    div.dos{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-    }
-
-    div.tres{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-
-    }
-
-    div.point{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-
-    }
-
-  }
-
-  div.fila5{
-    display: flex;
-    height: 2.8rem;
-    gap: 1rem;
-
-    div.paraper{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1.5rem;
-        margin-right: 4px;
-
-      }
-
-    }
-
-    div.cero{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      span{
-        font-size: 2rem;
-        font-weight: 900;
-      }
-    }
-
-    div.parcie{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1.5rem;
-        margin-left: 4px;
-      }
-
-    }
-
-    div.equal{
-      display: flex;
-      border: solid 3px black;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
-      width: 20%;
-      justify-content: center;
-      align-items: center;
-      border-radius: 1rem;
-      background-color: rgba(255, 255, 255, 0.5);
-      color: black;
-
-      img{
-        height: 1rem;
-      }
-
-    }
-
-  }
 
   div.fila6{
     height: 2.4rem;

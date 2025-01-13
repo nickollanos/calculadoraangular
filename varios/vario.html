@@ -374,3 +374,15 @@ scrollToBottom(): void {
   ngAfterViewChecked(): void {
     this.scrollToBottom();
   }
+
+
+
+  private pantallas ( num: string ) : void {
+    this.hLetra = 2.8;
+    this.sLetra = 2;
+
+    if (num !== 'history' && this.vHistory === true && this.vConver === false ){
+      this.vHistory = false;
+      this.vConver = true;
+    }
+  }

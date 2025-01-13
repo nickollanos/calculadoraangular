@@ -90,7 +90,7 @@ export class CalculosService {
     }
     console.log(operando);
     // operando = operando.replace(/(?<=[1-9\(])\)(?=\S)/g, ')*').replace(/\)(?=$)/g, ')');
-    operando = operando  .replace(/(?<=[1-9\(])\)(?=\d|\.\d|\))/g, ')*')
+    operando = operando.replace(/(?<=[0-9\(])\)(?=\d|\.\d|\))/g, ')*')
     .replace(/(?<=\))(?=\d|\.\d|\))/g, ')*')
     .replace(/\)(?=$)/g, ')');
     console.log(operando);
@@ -98,9 +98,10 @@ export class CalculosService {
     try {
       let datitos = operando.substring(0, 2);
       let firts = operando.substring(0, 1);
-      console.log(datitos);
+      console.log(firts);
 
-      if ( datitos !== '0.' && firts === '0' && operando.length >= 2 ){
+      console.log(datitos);
+      if ( firts === '0' && (/0(?![+\-/*\.])/.test(datitos)) && operando.length >= 2 ){
         operando = operando.replace(/^0+/, '');
 
         if ( operando === '' ){

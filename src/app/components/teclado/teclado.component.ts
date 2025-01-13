@@ -39,6 +39,8 @@ export class TecladoComponent {
       this.operador.emit('(');
     }else if (key === ')') {
       this.operador.emit(')');
+    }else if (key === 'h') {
+      this.operador.emit('history');
     }
 
 

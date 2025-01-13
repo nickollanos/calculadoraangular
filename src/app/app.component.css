@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 1400px ) {
+@media (min-width: 320px) {
 
 div.ppal{
   border-radius: 1rem;
@@ -9,7 +9,6 @@ div.ppal{
   height: 33rem;
   margin: auto;
   padding-bottom: 2rem;
-  border-color: red 5px solid;
 
   div.calc{
     border: solid 5px black;
@@ -31,10 +30,12 @@ div.ppal{
 
     div.pant{
       border: solid 5px black;
-      width: 80%;
+      max-width: 60%;
+      min-width: 80%;
       height: 10rem;
       border-radius: 1rem;
       background-color: rgb(238, 227, 227);
+      /* background-color: white; */
       align-items: center;
     }
 

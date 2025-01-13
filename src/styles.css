@@ -20,7 +20,7 @@
   font-style: italic;
 }
 
-@media (min-width: 320px) and (max-width: 1400px) {
+@media (min-width: 320px) {
   body {
     height: 100vh;
     margin: 0;

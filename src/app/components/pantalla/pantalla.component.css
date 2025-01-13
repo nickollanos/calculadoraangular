@@ -1,4 +1,4 @@
-@media (min-width: 320px) and (max-width: 1400px ) {
+@media (min-width: 320px) {
 div.error{
   height: 100%;
   width: 100%;
@@ -60,12 +60,11 @@ div.conver{
   flex-direction: column;
   align-items: end;
   justify-content: end;
-
-
+  /* border: red 5px solid; */
 
   div.oper{
-    width: 100%;
-    height: 100%;
+    width: 14rem;
+    height: 2rem;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -77,6 +76,7 @@ div.conver{
     scrollbar-width: none;
     white-space: pre-wrap;
     word-wrap: break-word;
+    /* border: green 5px solid; */
 
     h1{
       font-family: 'digital-7.ttf', sans-serif;
@@ -90,12 +90,13 @@ div.conver{
 
   div.equal{
     width: 100%;
-    height: 35%;
+    height: 45%;
     display: flex;
     flex-direction: column;
     align-items: end;
     justify-content: end;
     overflow: hidden;
+    /* border: yellow 5px solid; */
 
     span{
       font-family: 'digital-7.ttf', sans-serif;
