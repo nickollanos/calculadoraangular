@@ -43,24 +43,24 @@ export class AppComponent {
 
   public operadores ( num : string ) : void {
 
+    //VARIABLES
+    let penultimos = this.operando.slice(-2);
+
     //LOS LOG
-    console.log(num);
-    console.log(this.operando);
-    console.log(this.resultado);
+    // console.log(num);
+    // console.log(this.operando);
+    // console.log(this.resultado);
+
+    //VALIDA SI SE DIVIDE POR CERO
+    if ( penultimos === '/0' && (/^[^1-9.]*$/.test(num)) ){
+      this.operacion( this.operando);
+    }
 
     //VALIDACIONES PARA RETORNAR EXCEPCIONES
     if (this.validarReturn(num)) return;
 
-    console.log(this.operando);
-
     //RETORNA LAS PANTALLAS DE OPERACION Y RESULTADO CON TAMAÑO DE LAS FUENTES
     this.pantallas(num);
-
-    if ( this.operando !== '' && this.resultado === '' && /\d/.test(num) ){
-      this.operando = '';
-      this.operando += num;
-      num = '';
-    }
 
     //VALIDA SI TIENE COMO TAL ALGUNA ACCION ESPECIAL DE RESULTADO
     if ( num === 'delete' || num === 'c'|| num === 'history' || num === '='){
@@ -138,21 +138,12 @@ export class AppComponent {
         this.operando = this.operando.replace(/\b0+(\d)/g, '$1');
       }
 
-      let ultimos = this.operando.slice(-2);
-      console.log(ultimos);
-
-
-      if ( ultimos === '()' ) {
+      if ( penultimos === '()' ) {
         this.operando = this.operando.slice(0, -1);
         return;
-      } else if ( ultimos === '(-' ){
+      } else if ( penultimos === '(-' ){
         return;
       }
-
-      console.log(this.operando);
-
-      console.log(/^[+\/*]/.test( this.operando[this.operando.length-1] ));
-      console.log(this.operando[this.operando.length-2] === ')');
 
       if (/^[+\/*]/.test(this.operando[0]) ){
         this.operando = '';
@@ -296,14 +287,9 @@ export class AppComponent {
     let numeros = this.operando.split(/[+\-/*()]/);
     let fraccion = numeros[numeros.length - 1];
     let penultimos = this.operando.slice(-2);
-    console.log(penultimos);
 
-    if ( penultimos === '/0' && (/^[^1-9.]*$/.test(num)) ){
-      console.log(this.operando);
-      this.operacion( this.operando);
-    }
     //VALIDA PARA PONER PARENTESIS DE CIERRE
-    else if ( !this.operando.includes('(') && num === ')' || aperturaParentesis === cierreParentesis && num === ')'){
+    if ( !this.operando.includes('(') && num === ')' || aperturaParentesis === cierreParentesis && num === ')'){
       return true;
     }
     //VALIDA SI DESPUES DEL RESULTADO SE OPRIME DE NUEVO IGUAL NO HACE NADA
@@ -338,7 +324,6 @@ export class AppComponent {
     else if ( ultimocis === '/' && num === '0' ){
       this.operando += num;
       num = '';
-      console.log(this.operando);
       return true;
     }
     //VALIDA SI YA HAY UN PUNTO EN EL ULTIMO CONJUNTO DE NUMEROS Y NO PERMITE PONER UNO NUEVO
@@ -373,7 +358,16 @@ export class AppComponent {
     else if ( num === ')' && this.operando === '' ){
       return true;
     }
-    console.log(this.operando);
+    //VALIDA SI OPERANDO TIENE ALGO, EL RESULTADO ESTA VACIO Y SE ENVIA UN NUMERO SE LE ASIGNA A OPERANDO
+    else if ( this.operando !== '' && this.resultado === '' && /\d/.test(num) ){
+      this.operando = '';
+      this.operando += num;
+      this.resultado += num;
+      this.pantallas(num);
+      num = ''
+      return true;
+    }
+
     return false;
 
   }

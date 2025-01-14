@@ -55,19 +55,10 @@ export class CalculosService {
   }
 
   operacionDatos ( operando : string ) : Observable<string> {
-    console.log(operando);
 
     operando = operando.trim();
 
-    let formato = /^[0-9+\-*/().\s]*$/;
-    let apertura = (operando.match(/\(/g) || []).length;
-    console.log(apertura);
-
-    let cierre = (operando.match(/\)/g) || []).length;
-    console.log(cierre);
-
-
-    if ( !formato.test(operando) ){
+    if ( !/^[0-9+\-*/().\s]*$/.test(operando) ){
       return throwError(() => new Error('Expresion matematica invalida'));
     }
 
@@ -81,6 +72,9 @@ export class CalculosService {
 
     operando = operando.replace(/(\d)\.\(/g, '$1.0*(');
 
+    let apertura = (operando.match(/\(/g) || []).length;
+    let cierre = (operando.match(/\)/g) || []).length;
+
     if ( apertura > cierre ){
       operando = operando.replace(/(\d)(\()/g, '$1*(');
       let diferencia = apertura - cierre;
@@ -88,44 +82,28 @@ export class CalculosService {
     } else if ( cierre > apertura || cierre === apertura ) {
       operando = operando.replace(/(\d)(\()/g, '$1*(');
     }
-    console.log(operando);
-    // operando = operando.replace(/(?<=[1-9\(])\)(?=\S)/g, ')*').replace(/\)(?=$)/g, ')');
+
     operando = operando.replace(/(?<=[0-9\(])\)(?=\d|\.\d|\))/g, ')*')
     .replace(/(?<=\))(?=\d|\.\d|\))/g, ')*')
     .replace(/\)(?=$)/g, ')');
     console.log(operando);
 
-    try {
-      let datitos = operando.substring(0, 2);
-      let firts = operando.substring(0, 1);
-      console.log(firts);
+    let datitos = operando.substring(0, 2);
+    let firts = operando.substring(0, 1);
 
-      console.log(datitos);
-      if ( firts === '0' && (/0(?![+\-/*\.])/.test(datitos)) && operando.length >= 2 ){
-        operando = operando.replace(/^0+/, '');
-
-        if ( operando === '' ){
-          operando = '0';
-        }
+    if ( firts === '0' && (/0(?![+\-/*\.])/.test(datitos)) && operando.length >= 2 ){
+      operando = operando.replace(/^0+/, '');
+      if ( operando === '' ){
+        operando = '0';
       }
+    }
 
-      console.log(operando);
-      console.log('evaluando........');
-      let resultado = eval(operando);
-      console.log(resultado);
-
+    try {
+      let resultado = Function(`"use strict"; return (${operando})`)();
       resultado = parseFloat(resultado);
 
-      if ( resultado %1 === 0 ){
-        let result = resultado.toFixed(0);
-        console.log(result);
-        return of(result.toString());
-      } else {
-        let result = resultado.toFixed(2);
-        console.log(result);
-        return of(result.toString());
-      }
-
+      return of(resultado % 1 === 0 ? resultado.toFixed(0) : resultado.toFixed(2));
+      
     } catch (error) {
       return throwError( () => new Error('Error al realizar la operacion'));
     }
